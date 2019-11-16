@@ -1,12 +1,11 @@
 homeserver:
-  url: "http://localhost:8008"
-  domain: "localhost"
+  url: "https://matrix.nnev.de"
+  domain: "matrix.nnev.de"
   enablePresence: true
 ircService:
   servers:
-    irc.example.com:
-      name: "ExampleNet"
-      additionalAddresses: [ "irc2.example.com" ]
+    legacy-irc.robustirc.net:
+      name: "Robust IRC"
       port: 6697
       ssl: true
       sslselfsign: false
@@ -37,33 +36,27 @@ ircService:
         federate: true
         aliasTemplate: "#irc_$CHANNEL"
       membershipLists:
-        enabled: false
+        enabled: true
         floodDelayMs: 10000
         global:
           ircToMatrix:
-            initial: false
+            initial: true
             incremental: false
           matrixToIrc:
-            initial: false
+            initial: true
             incremental: false
-        rooms:
-          - room: "!fuasirouddJoxtwfge:localhost"
-            matrixToIrc:
-              initial: false
-              incremental: false
+        rooms: []
         channels:
-          - channel: "#foo"
+          - channel: "#chaos-hd"
             ircToMatrix:
               initial: false
               incremental: false
-      mappings:
-        "#thepub": ["!kieouiJuedJoxtVdaG:localhost"]
       matrixClients:
         userTemplate: "@irc_$NICK"
         displayName: "$NICK (IRC)"
         joinAttempts: -1
       ircClients:
-        nickTemplate: "$DISPLAY[m]"
+        nickTemplate: "$DISPLAY"
         allowNickChanges: true
         maxClients: 30
         ipv6:
@@ -88,7 +81,7 @@ ircService:
       - "1h"
       - "1d"
       - "1w"
-  databaseUri: "nedb://data"
+  databaseUri: "nedb:///data"
   debugApi:
     enabled: false
     port: 11100
@@ -97,7 +90,7 @@ ircService:
     requestTimeoutSeconds: 300
     ruleFile: "./provisioning.rules.yaml"
     enableReload: true
-  passwordEncryptionKeyPath: "passkey.pem"
+  passwordEncryptionKeyPath: "/config/passkey.pem"
   matrixHandler:
     eventCacheSize: 4096
   ircHandler:
