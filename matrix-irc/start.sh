@@ -8,6 +8,6 @@ start)
   exec node app.js -c /config/config.yaml -p 9995 -f /config/appservice-registration-irc.yaml -u http://localhost:9995
   ;;
 *)
-  echo catch all
+  echo "Usage:\n\t $0 (generate | start)"
   ;;
 esac
